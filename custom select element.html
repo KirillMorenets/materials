@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background: #333; height: 80vw; padding-top: 30vw">
+    <style>        
+        * {
+            box-sizing: border-box;
+        }
+        .services {
+            display: flex;
+            width: max-content;
+            background-color: #ffffffab;
+            padding: 15px 20px 20px 20px;
+            margin: 0 auto;
+        }
+        .services__country {
+            width: 180px;
+        }
+        .services__service {
+            width: 375px;
+        }
+        .services label {
+            margin-left: 12px;
+        }
+        .services-select {
+            position: relative;
+            height: 45px;
+            margin: 0 auto;
+            margin-top: 10px;            
+        }   
+        .services-select[data-state="active"] {
+                .services-select__title {
+                    &::before {
+                        transform: translate(-3px, -50%) rotate(-45deg);
+                    }
+                    &::after {
+                        transform: translate(3px, -50%) rotate(45deg);
+                    }
+                }            
+                .services-select__content {
+                    opacity: 1;
+                }            
+                .services-select__option + .services-select__input + .services-select__option {
+                    max-height: max-content;
+                    line-height: 1.3;
+                }
+            }    
+        .services-select__title {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            padding: 8px 30px 8px 16px;
+            border: solid 1px #d5d8dc;        
+            cursor: pointer;
+            line-height: 1.3;
+            background: #fff;
+            position: relative;
+            white-space: nowrap;
+            padding: 0;
+            &::before,
+            &::after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                right: 16px;
+                display: block;
+                width: 10px;
+                height: 2px;
+                transition: all 0.3s ease-out;
+                background-color: #000;
+                transform: translate(-3px, -50%) rotate(45deg);
+                z-index: 1;
+            }
+            &::after {
+                transform: translate(3px, -50%) rotate(-45deg);
+            }
+            &:hover {
+                border-color: #d5d8dc;
+                &::before, &::after {
+                    background-color: #000;
+                }
+            }                   
+        }
+        .services-select__title span {
+            width: calc(100% - 43px);
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding-left: 12px;
+            overflow: hidden;
+        }   
+        .services-select__content {
+            position: absolute;
+            top: 44px;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            background-color: #ffffff;
+            border: 1px solid #c7ccd1;     
+            transition: all 0.3s ease-out;
+            opacity: 0;
+            z-index: 5;
+            max-height: 224px;
+            overflow-y: auto;
+        }
+        .services-select__content::-webkit-scrollbar {
+            width: 5px;               /* ширина scrollbar */
+            cursor: pointer;
+        }
+        .services-select__content::-webkit-scrollbar-track {
+            background: #fff;        /* цвет дорожки */
+        }
+        .services-select__content::-webkit-scrollbar-thumb {
+            background-color: #dedede;    /* цвет плашки */
+            border-radius: 20px;       /* закругления плашки */
+        }   
+        .services-select__option {
+            display: table;
+            width: 100%;
+            padding: 6px 16px;            
+            transition: all 0.3s ease-out;
+            cursor: pointer;            
+            overflow: hidden;
+            margin: 0;
+            line-height: 1.4;            
+            &:hover {
+                color: #02a41c;
+                background-color: #e8eaf0;
+            }
+        }
+        .services__button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #02a41c;
+            transition: all 0.3s ease-out;
+            border: none;
+            cursor: pointer;
+            padding: 0 20px !important;
+            height: 45px;
+            margin-top: auto;
+            color: #fff;
+            &:hover {
+                background-color: #43cd19;
+            }
+        }
+        .services-select__content--over {
+            bottom: 44px;
+            top: auto;
+        }
+        @media only screen and (max-width: 768px) {
+            .services {
+                flex-wrap: wrap;
+                width: 90vw;
+            }
+            .services__country {
+                width: 35%;
+            }
+            .services__service {
+                width: 65%;;
+            }
+            .services-select {
+                margin-top: 7px;
+            }
+            .services-select__content {
+                display: none;
+            }
+            .services-select[data-state="active"] .services-select__content {
+                display: block;          
+            }
+            .services__button {
+                width: 100%;
+                margin-top: 20px;
+            }
+        }
+        @media only screen and (max-width: 420px) {
+            .services {    
+                background: none;
+                padding: 10px 0px 20px 0px;
+                font-size: 3.7vw;
+                width: auto;
+            }            
+            .services__button {
+                font-size: 3.7vw;
+            }
+        }
+    </style>
+    
+    <form class="services">
+        <div class="services__country">
+            <label for="countrySelect">Страна</label>
+            <div class="services-select" id="countrySelect" data-state="">
+                <div class="services-select__title" data-default="Option 0"><span>ОАЭ</span></div>
+                <div class="services-select__content services-select__content--over">                    
+                    <p id="countryOption0" class="services-select__option">ОАЭ</p>
+                    <p id="countryOption1" class="services-select__option">Арабские Эмираты</p>
+                    <p id="countryOption2" class="services-select__option">Дубай</p>
+                </div>
+            </div>
+        </div>
+        <div class="services__service">
+            <label for="serviceSelect">Услуга</label>
+            <div class="services-select" id="serviceSelect" data-state="">
+                <div class="services-select__title" data-default="Option 0"><span>Регистрация компаний в ОАЭ</span></div>
+                <div class="services-select__content services-select__content--over">                    
+                    <p id="serviceOption0" class="services-select__option">Регистрация компаний в ОАЭ</p>
+                    <p id="serviceOption1" class="services-select__option">Регистрация бизнес счета</p>
+                    <p id="serviceOption2" class="services-select__option">Регистрация личного счета</p>
+                    <p id="serviceOption3" class="services-select__option">Золотая виза резидента на основании владения недвижимостью</p>
+                    <p id="serviceOption4" class="services-select__option">Зеленая виза резидента на основании владения недвижимостью</p>
+                    <p id="serviceOption5" class="services-select__option">Золотая виза на основании депозита в банке</p>
+                    <p id="serviceOption6" class="services-select__option">Виза спонсора для члена семьи</p>
+                    <p id="serviceOption7" class="services-select__option">Фриланс виза</p>                    
+                    <p id="serviceOption8" class="services-select__option">Виза удаленного сотрудника</p>
+                    <p id="serviceOption9" class="services-select__option">Ликвидация компаний в ОАЭ</p>
+                    <p id="serviceOption10" class="services-select__option">Легализация документов</p>
+                    <p id="serviceOption11" class="services-select__option">Подбор школы для вашего ребенка</p>
+                </div>
+            </div>
+        </div>
+        <a class="services__button">Начать поиск</a>        
+    </form>
+    
+    <script> 
+        // for country select
+        const selectCountry = document.querySelector('.services__country>.services-select');
+        const selectCountry_title = selectCountry.querySelector('.services-select__title');
+        const selectCountry_titleText = selectCountry.querySelector('.services-select__title>span');
+        const selectCountry_option = selectCountry.querySelectorAll('.services-select__option');             
+        // Toggle menu
+        selectCountry_title.addEventListener('click', () => {
+            if ('active' === selectCountry.getAttribute('data-state')) {
+                selectCountry.setAttribute('data-state', '');
+            } else {
+                selectCountry.setAttribute('data-state', 'active');
+            };
+        });
+        // Close when click to option
+        for (let i = 0; i < selectCountry_option.length; i++) {
+            selectCountry_option[i].addEventListener('click', (evt) => {
+                selectCountry_titleText.textContent = evt.target.textContent;
+                selectCountry.setAttribute('data-state', '');
+                Array.from(selectCountry_option).forEach((i) => {
+                    i.style.background = 'none'; 
+                });
+                selectCountry_option[i].style.background = '#dedede';              
+            });
+        }
+        // Close when click to body
+        document.addEventListener("click",function(event) {
+            if (!event.target.closest(".services__country>.services-select")) {
+                selectCountry.setAttribute('data-state', '');
+            }
+        }, false)
+
+    
+        // for service select
+        const selectService = document.querySelector('.services__service>.services-select');
+        const selectService_title = selectService.querySelector('.services-select__title');
+        const selectService_titleText = selectService.querySelector('.services-select__title>span');
+        const selectService_option = selectService.querySelectorAll('.services-select__option');        
+        // Toggle menu
+        selectService_title.addEventListener('click', () => {
+            if ('active' === selectService.getAttribute('data-state')) {
+                selectService.setAttribute('data-state', '');
+            } else {
+                selectService.setAttribute('data-state', 'active');
+            }
+        });
+        // Close when click to option
+        for (let i = 0; i < selectService_option.length; i++) {
+            selectService_option[i].addEventListener('click', (evt) => {
+                selectService_titleText.textContent = evt.target.textContent;
+                selectService.setAttribute('data-state', '');
+                Array.from(selectService_option).forEach((i) => {
+                    i.style.background = 'none'; 
+                });
+                selectService_option[i].style.background = '#dedede';
+                k = i;
+            });
+        }
+        // Close when click to body
+        document.addEventListener("click",function(event) {
+            if (!event.target.closest(".services__service>.services-select")) {
+                selectService.setAttribute('data-state', '');
+            }
+        }, false)
+
+        //select popups open up or down
+        let servicesBlock = document.querySelector('.services');
+        let selectContent = document.getElementsByClassName('services-select__content');
+        const screenWidth = window.innerWidth;
+        window.onscroll = function() {            
+            if (document.documentElement.clientWidth < 768) {
+                if (document.documentElement.scrollTop > 100) {
+                    selectContent[0].classList.remove('services-select__content--over');
+                    selectContent[1].classList.remove('services-select__content--over');
+                } else {
+                    selectContent[0].classList.add('services-select__content--over');
+                    selectContent[1].classList.add('services-select__content--over');
+                }
+            } else {
+                if (document.documentElement.scrollTop > 150) {
+                    selectContent[0].classList.remove('services-select__content--over');
+                    selectContent[1].classList.remove('services-select__content--over');
+                } else {
+                    selectContent[0].classList.add('services-select__content--over');
+                    selectContent[1].classList.add('services-select__content--over');
+                }
+            };
+        };
+    </script>
+</body>
+</html>
