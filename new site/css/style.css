@@ -1,0 +1,55 @@
+/*variables*/
+:root {
+  --color-main: ;
+  --color-main-light: ;
+  --color-main-dark: ;
+}
+
+/*minimalistic reset css*/
+* { 
+  margin: 0; 
+  padding: 0;  
+  box-sizing: border-box;
+}
+
+/*fonts local including*/
+@font-face {
+  font-family: 'Font Name';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Font Name'), local('Font-Name'),
+    url('../assets/fonts/FontName-Regular.woff2') format('woff2'), 
+    url('../assets/fonts/FontName-Regular.woff') format('woff');
+}
+
+body {
+  margin: 0;
+  font-family: 'Font Name', sans-serif;
+  background-color: #fff;
+  color: #000;
+  font-size: 16px;
+}
+.container {
+  max-width: 1380px;
+  margin: 0 auto;
+}
+
+/*media queries breakpoints*/
+@media only screen and (max-width: 1200px) {
+  .container {
+    padding-left: 15px;
+    padding-right: 15px;
+   }
+}
+@media only screen and (max-width: 992px) {
+
+}
+@media only screen and (max-width: 768px) {
+
+}
+@media only screen and (max-width: 576px) {
+
+}
+@media only screen and (max-width: 420px) {
+
+}
