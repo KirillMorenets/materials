@@ -9,10 +9,11 @@
 </head>
 <body>
     <style>
-        .switch_wrap {
-            width: 90px;
+        .switch__button {
+            width: 118px;
+            padding-left: 12px;
         }
-        .switch_wrap .switch-item::after {
+        .switch__button .switch-item::after {
             content: '';
             height: 8px;
             width: 8px;
@@ -30,24 +31,20 @@
             transition: .3s ease-in-out;
             padding: 5px 0 5px 3px;
             margin: 0;
-        }        
-        .switch-item span {
+        }
+        .switch-item img {
             width: 20px;
+            margin-top: -2px;
+            margin-right: 15px;
         }
-        .switch-item:active {
-            color:inherit;
-        }
-        .switch_popup {
+        .switch__popup {
             display: none;
-            width: 85px;
+            width: 118px;
             margin-top: 7px;
             border-top: 3px solid #02a41c;
             position: absolute;
         }
-        .switch .switch_popup {
-            width: 130px;
-        }
-        .switch_popup::before {
+        .switch__popup:before {
             content: '';
             border: 5px solid transparent;
             border-bottom: 10px solid #02a41c;
@@ -55,40 +52,30 @@
             top: -15px;
             right: 15px;
         }
-        .switch .switch_popup .switch-item {
-            padding: 7px 0 7px 18px;
+        .switch__popup .switch-item {
+            padding: 7px 0 7px 14px;
         }
-        .switch_popup .switch-item:hover {
+        .switch__popup .switch-item:hover {
             color: #02a41c;
-            background-color: #e8eaf0;;
-        }
-        .switch-item img {
-            width: 20px;
-            margin-top: -2px;
-            margin-right: 15px;
+            background-color: #e8eaf0;
         }
         #language-en {
             display: none;
         }
-        p {
-            width: 50vw;
-            margin: 0 auto;
-            font-size: 20px;
-        }
     </style>    
     <div id="google_translate_element" style="display:none"></div>
     <div class="switch" translate="no">
-        <div class="switch_wrap" id="language-btn">
+        <div class="switch__button" id="language-btn">
             <p class="switch-item" id="language-ru"><img src="img/flag-ru.svg" alt="">RU</p>
             <p class="switch-item" id="language-en"><img src="img/flag-uk.svg" alt="">EN</p>
         </div>
-        <div class="switch_popup" id="language-popup">
-            <p class="switch-item" onclick="chooseRu(), changeLanguage('ru')"><img src="img/flag-ru.svg" alt="">Русский</p>
-            <p class="switch-item" onclick="chooseEn(), changeLanguage('en')"><img src="img/flag-uk.svg" alt="">English</p>
+        <div class="switch__popup" id="language-popup">
+            <p class="switch-item" onclick="chooseRu(); changeLanguage('ru')"><img src="img/flag-ru.svg" alt="">Русский</p>
+            <p class="switch-item" onclick="chooseEn(); changeLanguage('en')"><img src="img/flag-uk.svg" alt="">English</p>
         </div>       
     </div> 
     <br><br><br><br><br>
-    <p >При выборе языка происходит перевод всего текста на странице. Элемент Google вверху страницы можно скрыть при помощи стилей</p>
+    <p style="width: 50vw; margin: 0 auto; font-size: 20px;">При выборе языка происходит перевод всего текста на странице. Элемент Google вверху страницы можно скрыть при помощи стилей. Если нужно, мМожно запретить перевод какого-либо элемента через атрибут translate="no"</p>
 
     <script> 
         // switch for language
@@ -99,7 +86,6 @@
         languageBtn.onclick = function() {
             if (getComputedStyle(languagePopup).display == 'none') {
                 languagePopup.style.display = 'block';
-                console.log('123');
             } else {
                 languagePopup.style.display = 'none';
             }
