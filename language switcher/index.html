@@ -59,15 +59,12 @@
             color: #02a41c;
             background-color: #e8eaf0;
         }
-        #language-en {
-            display: none;
-        }
     </style>    
     <div id="google_translate_element" style="display:none"></div>
     <div class="switch" translate="no">
         <div class="switch__button" id="language-btn">
             <p class="switch-item" id="language-ru"><img src="img/flag-ru.svg" alt="">RU</p>
-            <p class="switch-item" id="language-en"><img src="img/flag-uk.svg" alt="">EN</p>
+            <p class="switch-item" id="language-en" style="display:none"><img src="img/flag-uk.svg" alt="">EN</p>
         </div>
         <div class="switch__popup" id="language-popup">
             <p class="switch-item" onclick="chooseRu(); changeLanguage('ru')"><img src="img/flag-ru.svg" alt="">Русский</p>
